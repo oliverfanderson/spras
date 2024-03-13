@@ -1,0 +1,8 @@
+name: hhn
+dependencies:
+  - python=3.5
+  - numpy=1.14.*
+  - scipy=0.19.*
+  - matplotlib=2.1.*
+  - networkx=1.11.*
+  - h5py=2.7.*

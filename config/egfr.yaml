@@ -1,6 +1,17 @@
 # The length of the hash used to identify a parameter combination
 hash_length: 7
 
+container_framework: docker
+
+# Allow the user to configure which container registry containers should be pulled from
+# Note that this assumes container names are consistent across registries, and that the
+# registry being passed doesn't require authentication for pull actions
+container_registry:
+   base_url: docker.io
+   # The owner or project of the registry
+   # For example, "reedcompbio" if the image is available as docker.io/reedcompbio/allpairs
+   owner: oliverfanderson
+
 # If true, use Singularity instead of Docker
 # Singularity support is only available on Unix
 singularity: false
@@ -9,7 +20,7 @@ algorithms:
   -
     name: pathlinker
     params:
-      include: true
+      include: false
       run1:
         k:
           - 10
@@ -17,7 +28,7 @@ algorithms:
   -
     name: omicsintegrator1
     params:
-      include: true
+      include: false
       run1:
         b:
           - 0.55
@@ -36,7 +47,7 @@ algorithms:
   -
     name: omicsintegrator2
     params:
-      include: true
+      include: false
       run1:
         b:
           - 4
@@ -50,7 +61,7 @@ algorithms:
   -
     name: meo
     params:
-      include: true
+      include: false
       run1:
         local_search:
           - "Yes"
@@ -61,12 +72,18 @@ algorithms:
   -
     name: domino
     params:
-      include: true
+      include: false
       run1:
         slice_threshold:
           - 0.3
         module_threshold:
           - 0.05
+  
+  - 
+    name: hhn
+    params:
+      include: true
+
 datasets:
   -
     data_dir: input
