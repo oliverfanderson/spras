@@ -65,6 +65,7 @@ algorithms:
                   b: [5, 6]
                   w: np.linspace(0,5,2)
                   d: [10]
+                  dummy_mode: ["file"] # Or "terminals", "all", "others"
 
       - name: "omicsintegrator2"
         params:
@@ -110,6 +111,8 @@ datasets:
     -
       # Labels can only contain letters, numbers, or underscores
       label: data0
+      # To run OmicsIntegrator1 with dummy nodes, add dummy.txt file to node_files
+      # or a dummy column to the node table
       node_files: ["node-prizes.txt", "sources.txt", "targets.txt"]
       # DataLoader.py can currently only load a single edge file, which is the primary network
       edge_files: ["network.txt"]
@@ -125,6 +128,21 @@ datasets:
       other_files: []
       # Relative path from the spras directory
       data_dir: "input"
+
+gold_standards:
+    -
+      # Labels can only contain letters, numbers, or underscores
+      label: gs0
+      node_files: ["gs_nodes0.txt"]
+      # edge_files: [] TODO: later iteration
+      data_dir: "input"
+      # List of dataset labels to compare with the specific gold standard dataset
+      dataset_labels: ["data0"]
+    -
+      label: gs1
+      node_files: ["gs_nodes1.txt"]
+      data_dir: "input"
+      dataset_labels: ["data1", "data0"]
 
 # If we want to reconstruct then we should set run to true.
 # TODO: if include is true above but run is false here, algs are not run.
@@ -166,3 +184,5 @@ analysis:
         linkage: 'ward'
         # 'euclidean', 'manhattan', 'cosine'
         metric: 'euclidean'
+      evaluation:
+        include: true
