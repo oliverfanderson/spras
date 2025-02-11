@@ -35,7 +35,7 @@ class TestResponseNet:
         out_path = Path(OUT_FILE)
         out_path.unlink(missing_ok=True)
         # Include all optional arguments
-        MinCostFlow.run(sources=TEST_DIR + 'input/' + graph + '/sources.txt',
+        ResponseNet.run(sources=TEST_DIR + 'input/' + graph + '/sources.txt',
                         targets=TEST_DIR + 'input/' + graph + '/targets.txt',
                         edges=TEST_DIR + 'input/' + graph + '/edges.txt',
                         OUT_FILE=OUT_FILE,
@@ -46,10 +46,10 @@ class TestResponseNet:
         assert out_path.exists()
 
     @pytest.mark.parametrize('graph', ['graph1'])
-    def test_mincostflow_missing(self, graph):
+    def test_responsenet_missing(self, graph):
         # Test the expected error is raised when required arguments are missing
         with pytest.raises(ValueError):
-            MinCostFlow.run(sources=TEST_DIR + 'input/' + graph + '/sources.txt',
+            ResponseNet.run(sources=TEST_DIR + 'input/' + graph + '/sources.txt',
                             targets=TEST_DIR + 'input/' + graph + '/targets.txt',
                             output_file=OUT_FILE)
 
